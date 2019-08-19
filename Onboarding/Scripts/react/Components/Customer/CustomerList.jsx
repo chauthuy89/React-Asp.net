@@ -113,19 +113,19 @@ export default class CustomerTable extends Component {
         let formIsValid = true
         if (!this.state.CustomerName) {
             formIsValid = false;
-            errors['CustomerName'] = '*Please enter the Customer Name.';
+            errors['CustomerName'] = 'Please enter the Customer Name.';
         }
 
         if (typeof this.state.CustomerName !== "undefined") {
             if (!this.state.CustomerName.match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
-                errors["CustomerName"] = "*Please enter alphabet characters only.";
+                errors["CustomerName"] = "Please enter alphabet characters only.";
             }
         }
 
         if (!this.state.CustomerAddress) {
             formIsValid = false;
-            errors['CustomerAddress'] = '*Please enter the Customer Address'
+            errors['CustomerAddress'] = 'Please enter the Customer Address'
         }
 
         this.setState({

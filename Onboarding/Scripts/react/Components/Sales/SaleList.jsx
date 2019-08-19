@@ -158,7 +158,7 @@ export default class SaleTable extends Component {
     onUpdateSubmit() {
         if (this.validateForm()) {
             let data = {
-                'Id': this.state.updateId,
+                'Id': this.setstate.updateId,
                 'ProductId': this.state.ProductId,
                 'CustomerId': this.state.CustomerId,
                 'StoreId': this.state.StoreId,
@@ -184,6 +184,7 @@ export default class SaleTable extends Component {
         if (list != "") {
             tableData = list.map(sale =>
                 <tr key={sale.Id}>
+                    
                     <td className="two wide">{sale.CustomerName}</td>
                     <td className="two wide">{sale.ProductName}</td>
                     <td className="two wide">{sale.StoreName}</td>
@@ -219,6 +220,7 @@ export default class SaleTable extends Component {
                     <table className="ui striped table">
                         <thead>
                             <tr>
+                               
                                 <th className="two wide">Customer</th>
                                 <th className="two wide">Product</th>
                                 <th className="two wide">Store</th>

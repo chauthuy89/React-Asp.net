@@ -36,9 +36,9 @@ export default class StoreDelete extends Component {
                 <Modal open={this.props.showDeleteModal} onClose={this.props.onClose} size='small'>
                     <Modal.Header>Delete Store</Modal.Header>
                     <Modal.Content>
-                        <h4>
+                        <h3>
                             Are you sure?
-                        </h4>
+                        </h3>
                     </Modal.Content>
                     <Modal.Actions>
                         <Button onClick={this.props.onClose} secondary >Cancel

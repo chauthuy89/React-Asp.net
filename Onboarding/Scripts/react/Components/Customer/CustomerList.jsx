@@ -1,11 +1,11 @@
 ﻿import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Button, } from 'semantic-ui-react';
-import CustomerDelete from './CustomerDelete.jsx';
+
 import CustomerCreate from './CustomerCreate.jsx';
 import CustomerUpdate from './CustomerUpdate.jsx';
 
-export default class CustomerTable extends Component {
+export default class CustomerList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +25,8 @@ export default class CustomerTable extends Component {
             updateId: 0,
 
             Sucess: [],
-            errors: {}
+            errors: {},
+            displayName: "Customers"//
         };
 
         this.loadData = this.loadData.bind(this);
@@ -39,6 +40,8 @@ export default class CustomerTable extends Component {
         this.showUpdateModel = this.showUpdateModel.bind(this);
         this.closeUpdateModel = this.closeUpdateModel.bind(this);
         this.onUpdateSubmit = this.onUpdateSubmit.bind(this);
+        this.delete = this.delete.bind(this);
+        this.onDeleteSubmit = this.onDeleteSubmit.bind(this);
 
     }
 
@@ -61,7 +64,19 @@ export default class CustomerTable extends Component {
         this.setState({ showDeleteModal: true });
         this.setState({ deleteId: id });
     }
+    onDeleteSubmit(id) {
+        $.ajax({
+            url: "/Customer/DeleteCustomer",
+            type: "post",
+            data: { 'id': id },
+            success: function (data) {
+                this.setState({ success: data })
+                window.location.reload()
+            }.bind(this)
+        });
 
+    }
+  
     closeDeleteModal() {
         this.setState({ showDeleteModal: false });
         window.location.reload()
@@ -97,10 +112,19 @@ export default class CustomerTable extends Component {
                     CustomerName: data.Name,
                     CustomerAddress: data.Address
                 })
-            }.bind(this)
+            }.bind()
         });
     }
-
+    //edit = (obj) => {
+    //    let url = 'api/' + this.state.displayName + '/' + obj.Id
+    //    fetch(url, {
+    //        method: 'GET',
+    //        headers: {
+    //            'Content-Type': 'application/json',
+    //        },
+    //        body: JSON.stringify(obj)
+    //    }).then(this.loadData());
+    //}
     closeUpdateModel() {
         this.setState({ showUpdateModel: false });
         window.location.reload()
@@ -148,6 +172,10 @@ export default class CustomerTable extends Component {
                 }.bind(this)
             });
         }
+    }
+    onClose() {
+        this.setState({ showDeleteModal: false });
+        window.location.reload()
     }
 
     render() {
@@ -200,6 +228,24 @@ export default class CustomerTable extends Component {
                         </tbody>
                     </table>
                 </div>
+            </React.Fragment>
+            <React.Fragment>
+                <Modal open={this.props.showDeleteModal} onClose={this.props.onClose} size='small'>
+                    <Modal.Header>Delete Customer</Modal.Header>
+                    <Modal.Content>
+                        <h3>
+                            Are you sure?
+                        </h3>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button onClick={this.props.onClose} secondary >Cancel
+                            </Button>
+                        <Button onClick={() => this.onDeleteSubmit(this.props.delete)} className="ui red button"> Delete <i className="x icon"></i>
+
+                        </Button>
+
+                    </Modal.Actions>
+                </Modal>
             </React.Fragment>
         )
     }

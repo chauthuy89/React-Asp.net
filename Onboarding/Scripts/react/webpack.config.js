@@ -35,15 +35,7 @@
                 ],
                 include: __dirname
             }
-            //{
-            //    test: /\.css$/,
-            //    include: __dirname,
-            //    loaders: [
-            //        require.resolve('style-loader'),
-            //        require.resolve('css-loader'),
-            //        require.resolve('sass-loader')
-            //    ]
-            //}
+           
         ]
     }
 }

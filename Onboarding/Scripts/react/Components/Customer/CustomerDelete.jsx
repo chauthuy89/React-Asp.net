@@ -11,6 +11,7 @@ export default class CustomerDelete extends Component {
 
         this.onDeleteSubmit = this.onDeleteSubmit.bind(this);
         this.onClose = this.onClose.bind(this);
+        //this.delete = this.delete.bind(this);//
     }
     
     onDeleteSubmit(id) {
@@ -25,6 +26,10 @@ export default class CustomerDelete extends Component {
         });
        
     }
+    //delete = () => {
+    //    this.props.delete({ Id: this.props.id, Name: this.state.name, Address: this.state.address });
+    //    this.handleClose();//
+    //}
 
     onClose() {
         this.setState({ showDeleteModal: false });
@@ -38,16 +43,17 @@ export default class CustomerDelete extends Component {
                 <Modal open={this.props.showDeleteModal} onClose={this.props.onClose} size='small'>
                     <Modal.Header>Delete Customer</Modal.Header>
                     <Modal.Content>
-                        <h4>
+                        <h3>
                             Are you sure?
-                        </h4>
+                        </h3>
                     </Modal.Content>
                     <Modal.Actions>
                         <Button onClick={this.props.onClose} secondary >Cancel
                             </Button>
-                        <Button onClick={() => this.onDeleteSubmit(this.props.delete)} className="ui red button"> Delete<i className="x icon"></i>
+                        <Button onClick={() => this.onDeleteSubmit(this.props.delete)} className="ui red button"> Delete <i className="x icon"></i>
                            
                         </Button>
+                    
                     </Modal.Actions>
                 </Modal>
             </React.Fragment>
